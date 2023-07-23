@@ -1,4 +1,4 @@
-package pageObjects;
+package pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +8,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import java.time.Duration;
 
 public class MainPage {
+    public static String mainPageURL = "https://qa-scooter.praktikum-services.ru/";
     private WebDriver driver;
+
     public  MainPage (WebDriver driver)
     {
         this.driver = driver;
@@ -20,7 +22,6 @@ public class MainPage {
         WebElement element = driver.findElement(By.id("accordion__heading-7"));
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
     }
-
     public void waitForAccoardeonPannelToBeClickable(int i){
         Duration duration = Duration.ofMinutes(1);
         new WebDriverWait(driver, duration)
@@ -34,8 +35,18 @@ public class MainPage {
         return driver.findElement(By.xpath(".//div[@id='accordion__panel-"+i+"']/p")).getText();
     }
 
+    public void clickTopOrderButton () {
+        driver.findElement(By.xpath(".//div[2]/button[1]")).click();
+    }
+    public void clickMiddleOrderButton () {
+        driver.findElement(By.xpath(".//div[2]/div[5]/button")).click();
+    }
 
-
-
-
+    public void scrollToMiddleOrderButton()
+    {
+        Duration duration = Duration.ofSeconds(5);
+        //new WebDriverWait(driver, duration).until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(".//div[2]/div[5]/button"))));
+        WebElement element = driver.findElement(By.xpath(".//div[2]/div[5]/button"));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
 }

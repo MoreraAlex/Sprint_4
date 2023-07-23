@@ -3,7 +3,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import pageObjects.MainPage;
+import pageobjects.MainPage;
 import org.junit.After;
 
 import static org.junit.Assert.assertEquals;
@@ -36,11 +36,11 @@ public class MainPageTests {
 
     @Test
     public void checkMainPage() {
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-        MainPage mainpage = new MainPage(driver);
-        mainpage.scrollToAccordionMenu();
-        mainpage.waitForAccoardeonPannelToBeClickable(messageNumber);
-        assertEquals("Текст не соответствует ожидаемому", accordeonMessage, mainpage.getAccordeonText(messageNumber));
+        driver.get(MainPage.mainPageURL);
+        MainPage mainPage = new MainPage(driver);
+        mainPage.scrollToAccordionMenu();
+        mainPage.waitForAccoardeonPannelToBeClickable(messageNumber);
+        assertEquals("Текст не соответствует ожидаемому", accordeonMessage, mainPage.getAccordeonText(messageNumber));
     }
 
     @After

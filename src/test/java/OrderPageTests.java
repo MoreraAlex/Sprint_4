@@ -3,7 +3,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import pageObjects.*;
+import pageobjects.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.After;
@@ -41,14 +41,28 @@ public class OrderPageTests {
 
 
     @Test
-    public void checkOrderPage() {
-        driver.get("https://qa-scooter.praktikum-services.ru/order");
+    public void checkOrderPageFlowUsingTopOrderButton() {
+        driver.get(MainPage.mainPageURL);
+        MainPage objMainPage = new MainPage(driver);
+        objMainPage.clickTopOrderButton();
         OrderPage objOrderPage = new OrderPage(driver);
         objOrderPage.fillPersonalInformation(name, surname, address, phoneNumber);
         objOrderPage.clickNextButton();
         objOrderPage.fillRentInformation(date, comment);
         assertThat(objOrderPage.resultMessage(), containsString("Номер заказа"));
+    }
 
+    @Test
+    public void checkOrderPageFlowUsingMiddleOrderButton() {
+        driver.get(MainPage.mainPageURL);
+        MainPage objMainPage = new MainPage(driver);
+        objMainPage.scrollToMiddleOrderButton();
+        objMainPage.clickMiddleOrderButton();
+        OrderPage objOrderPage = new OrderPage(driver);
+        objOrderPage.fillPersonalInformation(name, surname, address, phoneNumber);
+        objOrderPage.clickNextButton();
+        objOrderPage.fillRentInformation(date, comment);
+        assertThat(objOrderPage.resultMessage(), containsString("Номер заказа"));
     }
     @After
     public void teardown() {

@@ -1,10 +1,11 @@
-package pageObjects;
+package pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 public class OrderPage {
+    public static String orderPageURL = "https://qa-scooter.praktikum-services.ru/order";
     private WebDriver driver;
     public  OrderPage (WebDriver driver)
     {
@@ -15,6 +16,8 @@ public class OrderPage {
     private By surnameField = By.xpath(".//input[@placeholder='* Фамилия']");
     private By addressField = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
     private By phoneField = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
+    private By rentDate = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
+    private By commentForCourier = By.xpath(".//input[@placeholder='Комментарий для курьера']");
 
 
     public void setName(String name)
@@ -47,10 +50,7 @@ public class OrderPage {
     }
 
 
-    //следующая страница:
-    private By rentDate = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
-    //локатор для даты
-    private By commentForCourier = By.xpath(".//input[@placeholder='Комментарий для курьера']");
+
     public void setRentDate (String date){
         driver.findElement(rentDate).sendKeys(date);
         driver.findElement(By.xpath(".//div[@tabindex='0' and @role='button']")).click();
